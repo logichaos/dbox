@@ -1,40 +1,54 @@
 # distrobox config
 
-this is a distrobox config directory with a distrobox.ini file and scripts to help setup multiple boxes on a machine.
+A reproducible distrobox setup that can be carried over to other machines.
 
-## Setup
+## Usage
 
-The setup is made up of multiple containers used for different scenarios
+```bash
+./setup.sh
+```
+
+This assembles both containers via `distrobox.ini`, then runs post-setup verification and exports.
+
+Exported binaries land in `~/.local/bin` — make sure it's in your `PATH`.
+
+## Containers
 
 ### System
 
-- description: the system container contains common utilities
+- description: common utilities container
 - packages:
     - neovim
     - lazygit (using copr dejan/lazygit)
-    - jujutsu scm
+    - jujutsu scm (installed via cargo)
     - yazi file manager
     - nwg-displays (using copr tofik/nwg-shell)
 - exported to host:
     - neovim
     - lazygit
-    - jujutsu scm jj
+    - jujutsu scm (jj)
     - yazi file manager
+    - nwg-displays (desktop app)
 
 ### Development
 
-- description: the development container has all development tools (except for gui IDEs, which will be installed as flatpaks) required for development
+- description: all development tools (except GUI IDEs, which are installed as flatpaks)
 - packages:
     - dotnet sdk 10
-    - dotnet sdk 11 (latest beta)
-    - aspire cli
-    - azure function host
-    - azure cli
+    - dotnet sdk 11 (preview, via install script)
+    - aspire workload
+    - azure functions core tools
     - golang tools
     - npm
     - typescript
     - python
 
-## Notes
+## File Structure
 
-- the idea of this directory is to have a reproducible setup that can be carried over to other machines.
+```
+distrobox.ini          # declarative container definitions
+setup.sh               # main entry point
+scripts/
+  setup-system.sh      # post-setup verification & app exports for system container
+  setup-dev.sh         # post-setup verification for dev container
+```
