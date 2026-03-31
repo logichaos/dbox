@@ -21,6 +21,8 @@ Exported binaries land in `~/.local/bin` — make sure it's in your `PATH`.
     - neovim
     - lazygit (using copr dejan/lazygit)
     - jujutsu scm (installed via cargo)
+    - btop (system monitor)
+    - atop (system-wide performance monitor)
     - yazi file manager
     - nwg-displays (using copr tofik/nwg-shell)
 - exported to host:
