@@ -29,19 +29,19 @@ for t in "${TARGETS[@]}"; do
     case "$t" in
         system)
             echo "==> Rebuilding 'system' container..."
-            distrobox assemble create --file "$INI_FILE" --section system --replace --start
+            distrobox assemble create --file "$INI_FILE" --name system --replace
             echo "==> Running system post-setup..."
             bash "$SCRIPT_DIR/setup-system.sh"
             ;;
         dev)
             echo "==> Rebuilding 'dev' container..."
-            distrobox assemble create --file "$INI_FILE" --section dev --replace --start
+            distrobox assemble create --file "$INI_FILE" --name dev --replace
             echo "==> Running dev post-setup..."
             bash "$SCRIPT_DIR/setup-dev.sh"
             ;;
         all)
             echo "==> Rebuilding both containers..."
-            distrobox assemble create --file "$INI_FILE" --replace --start
+            distrobox assemble create --file "$INI_FILE" --replace
             echo "==> Running system post-setup..."
             bash "$SCRIPT_DIR/setup-system.sh"
             echo "==> Running dev post-setup..."

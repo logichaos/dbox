@@ -3,7 +3,7 @@ set -euo pipefail
 CONTAINER="dev"
 
 echo "Verifying dev container packages..."
-for cmd in dotnet go node npm tsc python3 func; do
+for cmd in dotnet go node npm tsc python3 func posting; do
     if distrobox enter "$CONTAINER" -- which "$cmd" > /dev/null 2>&1; then
         echo "  [ok] $cmd"
     else
